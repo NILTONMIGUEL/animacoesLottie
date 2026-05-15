@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class SplasheScreen extends StatelessWidget {
+class SplasheScreen extends StatefulWidget {
   const SplasheScreen({super.key});
+
+  @override
+  State<SplasheScreen> createState() => _SplasheScreenState();
+}
+
+class _SplasheScreenState extends State<SplasheScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, '/login');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
