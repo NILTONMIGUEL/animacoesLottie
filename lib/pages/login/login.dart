@@ -28,6 +28,7 @@ class _MyWidgetState extends State<Login> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
