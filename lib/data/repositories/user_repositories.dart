@@ -8,9 +8,9 @@ class UserRepository {
   //fazendo comunicação com api
 
   final IHttpClient client;
-  UserRepository(this.client);
+  UserRepository({required this.client});
 
-  Future<UserModel> login(Map<String, dynamic> data) async {
+  Future<UserModel> login({required Map<String, dynamic> data}) async {
     final response = await client.post(
       url: '${Endpoints.baseUrl}/login',
       data: data,
@@ -32,7 +32,6 @@ class UserRepository {
     } else {
       throw Exception('Erro desconhecido: ${response.statusCode}');
     }
-    // return response['token'] as String;
   }
 
   Future<List<UserModel>> get() async {

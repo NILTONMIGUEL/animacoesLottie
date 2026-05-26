@@ -7,6 +7,7 @@ import 'package:flutter_aplication01/data/repositories/user_repositories.dart';
 
 class UserStore {
   final UserRepository repository;
+
   final ValueNotifier<bool> isLoading = ValueNotifier(false);
   final ValueNotifier<List<UserModel>> state = ValueNotifier([]);
   final ValueNotifier<UserModel?> currentUser = ValueNotifier(null);
@@ -37,7 +38,7 @@ class UserStore {
     try {
       final Map<String, dynamic> data = {'email': email, 'password': password};
 
-      final user = await repository.login(data);
+      final user = await repository.login(data: data);
 
       if (user.token.isNotEmpty) {
         LocalStorage.saveString('token', user.token);
@@ -47,7 +48,11 @@ class UserStore {
     } on NotFoundException catch (e) {
       error.value = e.message;
     } catch (e) {
-      error.value = e.toString();
+      if (e.toString().contains('401')) {
+        error.value = 'Email ou senha inválidos';
+      } else {
+        error.value = e.toString();
+      }
     } finally {
       isLoading.value = false;
     }
